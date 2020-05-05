@@ -1,0 +1,97 @@
+package home.services.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import home.dao.houseMapper;
+import home.dao.renterMapper;
+import home.pojo.User;
+import home.pojo.house;
+import home.services.renterServices;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+
+public class renterServicesImpl implements renterServices {
+
+    @Autowired
+    private renterMapper renterMapper;
+    @Autowired
+    private houseMapper houseMapper;
+
+
+//    用户登录，匹配用户名和密码
+    @Override
+    public User renterLogin(String uname, String upassword) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("username",uname);
+        wrapper.eq("pwd",upassword);
+        wrapper.eq("isowner","房客");//为了防止房东房客重名，要检查身份
+        User user = renterMapper.selectOne(wrapper);
+        return renterMapper.selectOne(wrapper);
+    }
+
+//    租户注册
+    @Override
+    public int renterReg(User user) {
+        int i = renterMapper.insert(user);
+        return i;
+    }
+
+
+
+//    房东登录
+    @Override
+    public User hostLogin(String uname, String upassword) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("username",uname);
+        wrapper.eq("pwd",upassword);
+        wrapper.eq("isowner","房东");//为了防止房东房客重名，要检查身份
+        User user = renterMapper.selectOne(wrapper);
+        return renterMapper.selectOne(wrapper);
+    }
+
+    //    房东注册
+    @Override
+    public int hostReg(User user) {
+        int i = renterMapper.insert(user);
+        return i;
+    }
+
+//    房源推荐，可以在xml文件中更改检索规则
+    @Override
+    public List<house> houseRecomm() {
+        List<house> houses = renterMapper.houseRecomm();
+        return houses;
+    }
+
+//    最新上架的展示,使用mybatisplus完成降序查询和分页功能
+    @Override
+    public List<house> newHouse(int startpage,int pagesize) {
+        QueryWrapper<house> wrapper = new QueryWrapper();
+        wrapper.orderByDesc("uploadTime");
+        Page<house> page = new Page<>(startpage,pagesize);
+        IPage<house> houseIPage = houseMapper.selectPage(page, wrapper);
+        return houseIPage.getRecords();
+    }
+
+
+//    控制下面的翻页按钮和页码显示
+    @Override
+    public List<String> turnPage(int startpage, int pagesize) {
+        List<String> list = new ArrayList<>();
+        Page<house> page = new Page<>(startpage,pagesize);
+        IPage<house> houseIPage = houseMapper.selectPage(page, null);
+        list.add(String.valueOf(page.hasPrevious()));//是否有上一页
+        list.add(String.valueOf(page.hasNext()));//是否有下一页
+        list.add(String.valueOf(startpage));//当前页
+        list.add(String.valueOf(houseIPage.getPages()));//一共有多少页
+        return list;
+    }
+
+
+}

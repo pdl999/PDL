@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<div  id="home" class="banner about-banner" th:fragment="topbar">
+    <div class="banner-info">
+        <!--navigation-->
+        <div class="top-nav">
+            <nav>
+                <div class="container">
+                    <div class="navbar-header logo">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <h1><a href="index.html">Rental</a></h1>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-right">
+                            <li><a th:href="@{/index.html}" 	class="link-kumya" ><span data-letters="首页">首页</span></a></li>
+                            <li><a th:href="@{/houselist}" 	    th:class="${flag=='main'?'link-kumya active':'link-kumya'}"><span data-letters="大厅">大厅</span></a></li>
+                            <li><a th:href="@{/userback.html}"   th:class="${flag=='userback'?'link-kumya active':'link-kumya'}"><span data-letters="联系我们">联系我们</span></a></li>
+
+
+
+                            <li>
+                                <a  th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}"><span data-letters="登录/注册">登录/注册</span></a>
+                            </li>
+                            <li>
+                                <a  th:href="@{/personal.html}" 	th:class="${flag=='personal'?'link-kumya active':'link-kumya'}"><span data-letters="个人中心">个人中心</span></a>
+                            </li>
+<!--                            <li >-->
+<!--                                <a th:if="${per==1}" th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}"><span data-letters="登录/注册">登录/注册</span></a>-->
+<!--                                <a th:if="${per==3}" th:href="@{/personal.html}" 	th:class="${flag=='personal'?'link-kumya active':'link-kumya'}"><span data-letters="个人中心">个人中心</span></a>-->
+<!--&lt;!&ndash;                                <a th:case="'*'" th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}"><span data-letters="登录/注册">登录/注册</span></a>&ndash;&gt;-->
+<!--                            </li>-->
+
+
+
+
+
+
+
+
+
+
+
+
+                        </ul>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!--//navigation-->
+        <div class="banner-text">
+            <h2>WE'LL HELP YOU FIND YOUR DREAM HOME</h2>
+        </div>
+    </div>
+</div>
+
+<div class="footer" th:fragment="footer">
+    <div class="container">
+        <div class="col-md-4 footer-grids">
+            <h3>Review</h3>
+            <p>Sed ut turpis elit ullamcorper in auctor non, accumsan vel lacus nulla auctor cursus nunc. Maecenas ultricies dolor in urna tempus, id egestas erat finibus  interdum lectus eget scelerisque.</p>
+        </div>
+        <div class="col-md-3 footer-grids">
+            <h3>Contact Me</h3>
+            <p>123 NewYork City USA.<br>
+                <span>Office: 908-0000</span>
+            </p>
+            <div class="footer-bottom">
+                <a href="#"><span>Facebook</span></a>
+                <a href="#"><span>Pinterest</span></a>
+                <a href="#"><span>LinkedIn </span></a>
+                <a href="#"><span>Behance</span></a>
+            </div>
+        </div>
+        <div class="col-md-5 footer-grids">
+            <h3>Flickr</h3>
+            <a  class="footer-img" href="single.html"> <img src="../static/images/f1.jpg" alt=""/></a>
+            <a class="footer-img" href="single.html"> <img src="../static/images/f2.jpg" alt=""/></a>
+            <a class="footer-img" href="single.html"> <img src="../static/images/f3.jpg" alt=""/></a>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="footer-copy">
+            <p>© 2016 Rental. All rights reserved | Design by <a href="http://www.xmoban.cn/">xmoban.cn</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!--
+Author: xmoban.cn
+Author URL: http://www.xmoban.cn/
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Rental a Real Estates and Builders Category Flat bootstrap Responsive website Template | Home :: xmoban.cn</title>
+<!--mobile apps-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Rental Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--mobile apps-->
+<!--Custom Theme files -->
+<link th:href="@{/css/bootstrap.css}" type="text/css" rel="stylesheet" media="all">
+<link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" media="all">
+<link rel="stylesheet" th:href="@{/css/prettySticky.css}" type="text/css">
+<!-- //Custom Theme files -->
+<!-- js -->
+<script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+<!-- //js -->
+<!-- start-smoth-scrolling-->
+<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+		
+		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+</script>
+<!--//end-smoth-scrolling-->
+</head>
+<body>
+	<!--banner-->
+	<div  id="home" class="banner">
+		<div class="banner-info">
+			<!--navigation-->
+			<div class="top-nav">
+				<nav>
+					<div class="container">
+						<div class="navbar-header logo">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<h1><a href="index.html" style="font-family:宋体;font-size:38px;color:#fff;line-height:1.2em;">归家</a></h1>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-right">
+								<li><a th:href="@{/index.html}" 	   class="link-kumya active scroll"><span data-letters="首页">首页</span></a></li>
+								<li><a th:href="@{/houselist}" 	    class="link-kumya"><span data-letters="大厅">大厅</span></a></li>
+								<li><a th:href="@{/userback.html}"    class="link-kumya"><span data-letters="联系我们">联系我们</span></a></li>
+								<li><a th:href="@{/login.html}" 	   class="link-kumya"><span data-letters="登录/注册">登录/注册</span></a></li>
+							</ul>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+				</nav>
+			</div>	
+			<!--//navigation-->
+			<div class="banner-text">
+				<!--banner Slider starts Here-->
+				<script th:src="@{/js/responsiveslides.min.js}"></script>
+				<script>
+					// You can also use "$(window).load(function() {"
+					$(function () {
+					  // Slideshow 3
+					  $("#slider3").responsiveSlides({
+						auto: true,
+						pager: true,
+						nav: false,
+						speed: 500,
+						namespace: "callbacks",
+						before: function () {
+						  $('.events').append("<li>before event fired.</li>");
+						},
+						after: function () {
+						  $('.events').append("<li>after event fired.</li>");
+						}
+					  });
+				
+					});
+				</script>
+				<!--//End-slider-script-->
+				<div  id="top" class="callbacks_container">
+					<ul class="rslides" id="slider3">
+						<li>
+							<div class="banner-text-info">
+								<h2 style="font-family:宋体;font-size:38px;color:#fff;line-height:1.2em;margin-top:1em;">平静生活从“心”开始</h2>	
+								
+								<h3 style="font-family:宋体;font-size:38px;color:#fff;line-height:1.2em;margin-top:1em;">用心选择的归宿，才是心灵的港湾</h3>
+								<div class="more">
+									<a href="single.html" class="button-pipaluk button--inverted">更多</a>
+								</div>	
+							</div>	
+						</li>
+						<li>
+							<div class="banner-text-info">
+								<h2 style="font-family:宋体;font-size:38px;color:#fff;line-height:1.2em;margin-top:1em;">有家才有归途</h2>	
+								<h3 style="font-family:宋体;font-size:38px;color:#fff;line-height:1.2em;margin-top:1em;">无论身处何方，家是永远的方向</h3>
+								<div class="more">
+									<a href="single.html" class="button-pipaluk button--inverted"> 更多</a>
+								</div>	
+							</div>	
+						</li>
+						<li>
+							<div class="banner-text-info">
+								<h2 style="font-family:宋体;font-size:38px;color:#fff;line-height:1.2em;margin-top:1em;">归家网--您最可靠的选择</h2>	
+								<h3 style="font-family:宋体;font-size:38px;color:#fff;line-height:1.2em;margin-top:1em;">用心把关，坚守品质，“归家”不再烦恼</h3>
+								<div class="more">
+									<a href="single.html" class="button-pipaluk button--inverted"> 更多</a>
+								</div>	
+							</div>	
+						</li>
+					</ul>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<!--//banner-->
+	<!--welcome-->
+	<div class="welcome">
+		<div class="container">
+			<div class="col-md-6 welcome-left ">
+				<img src="../static/images/img1.jpg" alt=""/>
+			</div>
+			<div class="col-md-6 welcome-right">
+				<h3 class="title">关于“归家”</h3>
+				<p>我们是以为用户提供更好的住房服务为目标的综合平台，通过对需求的准确分析和信息共享来为您解决住房烦恼</p>
+				<div class="welcome-info">
+					<div class="col-md-2 welcome-text wtext-left">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+					</div>
+					<div class="col-md-10 welcome-text wtext-right">
+						<h4>可靠</h4>
+						<p>所有的房源信息都经过了网站的信息认证，你可以看到曾经租户的评价，并且拥有官方快捷高效的处理渠道，防止权益受到侵犯</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="welcome-info">
+					<div class="col-md-2 welcome-text wtext-left">
+						<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+					</div>
+					<div class="col-md-10 welcome-text wtext-right">
+						<h4>个性</h4>
+						<p>所有的房源信息都经过二次筛选分类，通过对用户的选房偏好进行精准推荐，更加贴切实际</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!--//welcome-->
+	<!--tabs-->
+	<div class="tabs">
+		<div class="container">
+			<div class="col-md-6 tabs-left">
+				<div class="col-xs-2 tab-grid-left"> <!-- required for floating -->
+					<!-- Nav tabs -->
+					 <ul class="nav nav-tabs">
+						<li class="active"><a href="#Tab1" data-toggle="tab">Tab1</a></li>
+						<li><a href="#Tab2" data-toggle="tab">Tab2</a></li>
+						<li><a href="#Tab3" data-toggle="tab">Tab3</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-10 tab-grid-right">
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="Tab1">
+							<div class="text">
+								<h3 class="title">最新的信息</h3>
+								<p>随时查看了解当下最新的房源，并有智能推送，热销户型等多样的选择方式</p>
+								<div class="more more2">
+									<a href="single.html" class="button-pipaluk button--inverted"> 了解更多</a>
+								</div>	
+							</div>
+						</div>
+						<div class="tab-pane" id="Tab2">
+							<div class="text">
+								<h3 class="title">透明的价格</h3>
+								<p>所有的房源价格都是由卖家/房东直接制定，并经过平台审核上架，租客房东自由沟通，过程公开透明，平台不抽取任何利润</p>
+								<div class="more more2">
+									<a href="single.html" class="button-pipaluk button--inverted"> 了解更多</a>
+								</div>	
+							</div>
+						</div>
+						<div class="tab-pane" id="Tab3">
+							<div class="text">
+								<h3 class="title">公正的平台</h3>
+								<p>平台设有高效便捷的投诉/反馈处理渠道，切实保障租户的一切正当权益，同时开通房源租户的评价功能，让租户全方位了解房源信息</p>
+								<div class="more more2">
+									<a href="single.html" class="button-pipaluk button--inverted"> 了解更多</a>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-6 tabs-right ">
+				<img th:src="@{/images/img2.jpg}" alt=""/>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!--//tabs-->
+	<!-- services -->
+	<div class="services" id="services">
+		<div class="container">
+			<h3 class="title">平台特色</h3>
+			<div class="servc-grids">
+				<div class="col-md-6 servc-grid">
+					<div class="col-xs-3 servc-grid-left">
+						<span class="glyphicon glyphicon-th-large effect-1" aria-hidden="true"></span>
+					</div>
+					<div class="col-xs-9 servc-grid-right">
+						<h4>实时信息</h4>
+						<p>通过“归家”网平台，可以了解到当下最新的租房信息和最适合您的推荐</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="col-md-6 servc-grid">
+					<div class="col-xs-3 servc-grid-left">
+						<span class="glyphicon glyphicon-tree-deciduous effect-1" aria-hidden="true"></span>
+					</div>
+					<div class="col-xs-9 servc-grid-right">
+						<h4>高效的租售平台</h4>
+						<p>如果你有闲置的房产，可以注册成为房东，平台提供高效管理系统助你轻松管理，实现盈利</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="servc-grids">
+				<div class="col-md-6 servc-grid">
+					<div class="col-xs-3 servc-grid-left">
+						<span class="glyphicon glyphicon-tasks effect-1" aria-hidden="true"></span>
+					</div>
+					<div class="col-xs-9 servc-grid-right">
+						<h4>公正透明</h4>
+						<p>房源价格经过平台审核，平台不抽取任何利润，同时开放反馈渠道，保障用户权益</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="col-md-6 servc-grid">
+					<div class="col-xs-3 servc-grid-left">
+						<span class="glyphicon glyphicon-globe effect-1" aria-hidden="true"></span>
+					</div>
+					<div class="col-xs-9 servc-grid-right">
+						<h4>更多</h4>
+						<p>后续功能正在开发</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="servc-grids">
+				<div class="col-md-6 servc-grid">
+					<div class="col-xs-3 servc-grid-left">
+						<span class="glyphicon glyphicon-cog effect-1" aria-hidden="true"></span>
+					</div>
+					<div class="col-xs-9 servc-grid-right">
+						<h4>个性化推荐</h4>
+						<p>通过对房源信息的分类整合以及租户标签的匹配，将会自动推荐最合适的房源，同时支持随时管理个人信息，适应用户需求的变化</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+	<!-- //services -->
+	<!--slid-->
+	<div class="slid">
+		<div class="container">	
+			<h3 class="title">火热户型</h3>
+			<div class="slid-row">
+				<div class="col-md-4 slid-grids">
+					<h4>经济户型</h4>
+					<h5>$5000</h5>
+					<div class="more">
+						<a href="single.html" class="button-pipaluk button--inverted"> 马上了解</a>
+					</div>	
+				</div>
+				<div class="col-md-4 slid-grids">
+					<h4>合租户型</h4>
+					<h5>$8000</h5>
+					<div class="more">
+						<a href="single.html" class="button-pipaluk button--inverted"> 马上了解</a>
+					</div>	
+				</div>
+				<div class="col-md-4 slid-grids">
+					<h4>更多超值户型</h4>
+					<h5>.</h5>
+					<div class="more">
+						<a href="single.html" class="button-pipaluk button--inverted"> 了解更多</a>
+					</div>	
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+	<!--//slid-->
+	<!--footer-->
+	<div th:insert="~{commons/commons::footer}"></div>
+	<!--//footer-->
+	<!-- script-for prettySticky -->
+	<script th:src="@{/js/prettySticky.js}"></script>
+	<!--//script-for prettySticky -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>

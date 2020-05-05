@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="home.dao.renterMapper">
+
+<!--    热推房源，将最新房源的前三名找出来-->
+    <select id="houseRecomm" resultType="home.pojo.house">
+        SELECT * FROM house ORDER BY uploadTime DESC LIMIT 3
+    </select>
+</mapper>

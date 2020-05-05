@@ -1,0 +1,257 @@
+<!--
+Author: xmoban.cn
+Author URL: http://www.xmoban.cn/
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rental a Real Estates and Builders Category Flat bootstrap Responsive website Template | Contact ::
+        xmoban.cn</title>
+    <!--mobile apps-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Rental Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!--mobile apps-->
+    <!--Custom Theme files -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}" href="../static/css/normalize.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/default.css}" href="../static/css/default.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" href="../static/css/login.css">
+    <link th:href="@{/css/bootstrap.css}" type="text/css" rel="stylesheet" media="all">
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" th:href="@{/css/prettySticky.css}" type="text/css">
+
+    <!-- //Custom Theme files -->
+    <!-- js -->
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <!-- //js -->
+    <!-- start-smoth-scrolling-->
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+            $(".regselect").click(function () {
+                var str = $("input[name='reg_isowner']:checked").val();
+                if (str=="reg_renter"){
+                    $(".doaction").attr("action","/renter/reg");//租客注册
+                }else{
+                    $(".doaction").attr("action","/host/reg");//房东注册
+                }
+            })
+            $(".login_select").click(function () {
+                var str = $("input[name='isowner']:checked").val();
+                if (str=='login_renter'){
+                    $(".doaction").attr("action","/renter/login");//租客登录
+                }else{
+                    $(".doaction").attr("action","/host/login");//房东登录
+                }
+            })
+            //点击登录
+            $(".sign-in").click(function () {
+                $("#login_isowner1").prop('checked','true');
+                $(".doaction").attr("action","/renter/login");//初始化设置为租客登录
+            })
+        //    点击注册
+            $(".sign-up").click(function () {
+                $("#reg_isowner1").prop('checked','true');
+                $(".doaction").attr("action","/renter/reg");//初始化设置为租客注册
+            })
+        });
+    </script>
+    <!--//end-smoth-scrolling-->
+</head>
+<body>
+<div th:insert="~{commons/commons::topbar(flag='login')}"></div>
+<!-- contact -->
+<div class="contact">
+    <div class="container">
+<!--        表单开始-->
+        <form method="post"  class="doaction" th:action="@{/renter/login}">
+        <div class="login-wrap">
+            <div class="login-html">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
+                In</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+                <div class="login-form">
+                    <div class="sign-in-htm">
+                        <div class="group login_select">
+                            <div class="radio login_huser" style="display: inline-block">
+                                <label style="margin-left: 100px;">
+                                    <input type="radio" name="isowner" id="login_isowner1" value="login_renter"
+                                           checked  >
+                                    我是租客
+                                </label>
+                            </div>
+                            <div class="radio login_howner" style="display: inline-block">
+                                <label style="margin-left: 30px">
+                                    <input type="radio" name="isowner" id="login_isowner2" value="login_host">
+                                    我是房东
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="group">
+                            <label for="user" class="label">用户名</label>
+                            <input id="user" type="text" class="input te" name="renterLogname">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">密码</label>
+                            <input id="pass" type="password" class="input te" data-type="password" name="renterLogpwd">
+                        </div>
+
+                        <div class="group">
+                            <input type="submit" class="button" value="Sign In">
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <span th:text="${tip}" style="color: red"> </span>
+                        </div>
+                    </div>
+
+                    <div class="sign-up-htm">
+                        <div class="group regselect" >
+                            <div class="radio login_huser" style="display: inline-block">
+                                <label style="margin-left: 100px;">
+                                    <input type="radio" name="reg_isowner" id="reg_isowner1" value="reg_renter"
+                                         checked  >
+                                    注册租客
+                                </label>
+                            </div>
+                            <div class="radio login_howner" style="display: inline-block">
+                                <label style="margin-left: 30px">
+                                    <input type="radio" name="reg_isowner" id="reg_isowner2" value="reg_host">
+                                    注册房东
+                                </label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="group">
+                            <label for="user" class="label">用户名</label>
+                            <input id="user1" type="text" class="input te" name="regname">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">密码</label>
+                            <input id="pass3" type="password" class="input te" data-type="password" name="regpwd">
+                        </div>
+
+
+                        <div class="group">
+                            <label for="pass" class="label">性别</label>
+                            <div class="radio sex_man" style="display: inline-block">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="男"
+                                           checked>
+                                    男
+                                </label>
+                            </div>
+                            <div class="radio sex_woman" style="display: inline-block">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="女">
+                                    女
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="group">
+                            <label for="pass" class="label">我的个人标签</label>
+                            <div class="checkbox stu" style="display: inline-block">
+                                <label>
+                                    <input type="checkbox" name="tags" id="tag1" value="学生">
+                                    学生
+                                </label>
+                            </div>
+                            <div class="checkbox worker" style="display: inline-block">
+                                <label>
+                                    <input type="checkbox" name="tags" id="tag2" value="上班">
+                                    上班
+                                </label>
+                            </div>
+                            <br>
+                            <div class="checkbox party" style="display: inline-block">
+                                <label>
+                                    <input type="checkbox" name="tags" id="tag3" value="聚会">
+                                    聚会
+                                </label>
+                            </div>
+                            <div class="checkbox family" style="display: inline-block">
+                                <label>
+                                    <input type="checkbox" name="tags" id="tag4" value="家庭">
+                                    家庭
+                                </label>
+                            </div>
+                            <div class="checkbox trent" style="display: inline-block">
+                                <label>
+                                    <input type="checkbox" name="tags" id="tag5" value="合租">
+                                    合租
+                                </label>
+                            </div>
+                            <div class="checkbox eco" style="display: inline-block">
+                                <label>
+                                    <input type="checkbox" name="tags" id="tag6" value="经济" checked>
+                                    经济
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="group">
+                            <label for="pass" class="label">联系手机</label>
+                            <input id="phone" type="text" class="input te"  name="phone">
+                        </div>
+
+                        <div class="group">
+                            <input type="submit" class="button" value="Sign Up" id="regbut" >
+                        </div>
+                        <div class="group" style="text-align: center">
+<!--                            <label for="pass" class="label">Email Address</label>-->
+                            <span  id="regtip" style="color: red"></span>
+                            <span  th:text="${regtip}" style="color: red"></span>
+                        </div>
+                        <div class="hr"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <div class="address">
+            <ul>
+                <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>123 Fourth Avenue,SEATTLE WA
+                    98104,USA
+                </li>
+                <li><i class="phon">CALL US :</i> +0955 670 204</li>
+                <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">
+                    mail@example.com</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<!-- //contact -->
+<!--footer-->
+<div th:insert="~{commons/commons::footer}"></div>
+
+<!--//footer-->
+<!-- script-for prettySticky -->
+<script th:src="@{/js/prettySticky.js}"></script>
+<!--//script-for prettySticky -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.js}"></script>
+<script type="text/javascript" th:src="@{/js/register.js}"></script>
+</body>
+</html>
