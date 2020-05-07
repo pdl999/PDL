@@ -41,26 +41,43 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 event.preventDefault();
                 $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
             });
-
             $(".f-nav li").click(function () {
                 $(this).attr("class", "intiact");
                 $(this).siblings().attr("class", "noact");
             })
 
 
-            //初始化就会执行的方法
+
+
+            //初始化就会执行的方法，初始化一开始的页面信息
             window.onload=function setpage(){
                 var page = 1;
-                checkHouse(page);//查询房源信息
-                turnPage(page);//分页
+                var houseurl = "/newhouse";
+                var pageurl = "/turnpage";
+                checkHouse(page,houseurl);//查询房源信息
+                turnPage(page,pageurl);//分页
             }
 
+            //用ul的id来保存请求路径
+            $(".f-nav li").on("click",function (obj) {
+                if($(this).index()==0){
+                    $(".f-nav").attr('id','/newhouse');
+                    $(".cpage").attr("id","/turnpage");
+                }else if($(this).index()==1){
+                    $(".f-nav").attr('id','/perhouse');
+                    $(".cpage").attr("id","/turnpage2")
+                }else if($(this).index()==2){
+                    $(".f-nav").attr('id','/allhouse');
+                    $(".cpage").attr("id","/turnpage3")
+                }
+            })
+
             //刷新房源信息
-            function checkHouse(page)
+            function checkHouse(page,houseurl)
             {
                 $.ajax({
                     type: "post",
-                    url: "/newhouse",    //向后端请求数据的url
+                    url: houseurl,    //向后端请求数据的url
                     data: {
                         startpage:page,
                         pagesize:6
@@ -68,8 +85,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     success: function (data) {
                         var html = "";
                         for (var i=0;i<data.length;i++){
-                            html += "<div class='listitem col-md-3'>" +
-                                " <a href='/detail.html' target='_blank' title='点击了解' alt='点击了解'>" +
+                            html += "<div class='listitem col-md-3' id='" +data[i].houseid+
+                                " '><a href='/detail.html' target='_blank' title='点击了解' alt='点击了解'>" +
                                 "<img src='.."+data[i].housepic+"' class='listimg'>\n" +
                                 "</a>" +
                                 "<div class='item_mes'>" +
@@ -88,10 +105,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 });
             }
             //控制翻页按钮和页码显示
-            function turnPage(page) {
+            function turnPage(page,pageurl) {
                 $.ajax({
                     type: "post",
-                    url: "/turnpage",    //向后端请求数据的url
+                    url: pageurl,    //向后端请求数据的url
                     data: {
                         startpage:page,
                         pagesize:6
@@ -104,27 +121,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 });
             }
 
-
+            //上一页按钮
             $(".prepage").on("click",function () {
                 var nowpage = parseInt($(".nowpage").html());
-                // var tolpage = parseInt($(".tolpage").html());
                 if (nowpage==1){
                     alert("已经在首页");
                 } else {
-                    checkHouse(nowpage-1);
-                    turnPage(nowpage-1);
+                    var requrl = $(".cpage").attr("id");
+                    var pageurl = $(".f-nav").attr("id");
+                    checkHouse(nowpage-1,pageurl);
+                    turnPage(nowpage-1,requrl);
                 }
             })
+            //下一页按钮
             $(".nextpage").on("click",function () {
                 var nowpage = parseInt($(".nowpage").html());
                 var tolpage = parseInt($(".tolpage").html());
                 if (nowpage==tolpage){
                     alert("已经到底了");
                 }else{
-                    checkHouse(nowpage+1);
-                    turnPage(nowpage+1);
+                    var requrl = $(".cpage").attr("id");
+                    var pageurl = $(".f-nav").attr("id");
+                    checkHouse(nowpage+1,pageurl);
+                    turnPage(nowpage+1,requrl);
                 }
             })
+
+
         });
     </script>
     <!--//end-smoth-scrolling-->
@@ -138,10 +161,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <br>
 
-        <ul class="f-nav col-md-12" id='f-nav'>
-            <li class="intiact">最新上架</li>
-            <li class="noact">专属推荐</li>
-            <li class="noact">所有房源</li>
+        <ul class="f-nav col-md-12" id="/newhouse">
+            <li class="intiact" id="newhouse">最新上架</li>
+            <li class="noact" id="perhouse">专属推荐</li>
+            <li class="noact" id="allhouse">所有房源</li>
             <li class="noact">浏览记录</li>
             <li class="noact">更多功能</li>
         </ul>
@@ -227,7 +250,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         </div>
         <!--            翻页按钮-->
-        <div class="col-md-12 cpage">
+        <div class="col-md-12 cpage" id="/turnpage">
             <button class="btn btn-default prepage" style="line-height: 50px;" ><a>上一页</a></button>
             <p style="display: inline-block;"></p>
             <button class="btn btn-default nextpage" style="line-height: 50px;"><a>下一页</a></button>

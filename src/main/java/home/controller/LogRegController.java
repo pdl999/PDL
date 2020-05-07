@@ -30,13 +30,14 @@ public class LogRegController {
         if (user!=null){
 //            查询结果不为空，登录成功
             model.addAttribute("user",user);//存放用户信息
+            System.out.println(model.getAttribute("user"));
             model.addAttribute("tip","");
             List<house> houses = renterServices.houseRecomm();
             for (int i=0;i<3;i++){
                 String hot = "hot"+i;
                 model.addAttribute(hot,houses.get(i));
             }
-            return "main.html";
+            return "/main.html";
         }else{
             model.addAttribute("tip","用户名或密码错误");//存放登录失败提示信息
             return "/login";
@@ -137,19 +138,18 @@ public String hostReg(@RequestParam(required = true) String regname,
     @RequestMapping("/newhouse")
     @ResponseBody
     public List<house> newHouse(int startpage,int pagesize){
+        System.out.println("刷新房源信息");
         return renterServices.newHouse(startpage,pagesize);
     }
-
-
-//    控制显示页面的时候，下方的按钮和页数显示
+//    控制显示页面的时候，下方的页数显示
     @RequestMapping("/turnpage")
     @ResponseBody
-    public List<String> turnPage(int startpage,int pagesize){
-        System.out.println("开始分页");
-        List<String> list = renterServices.turnPage(startpage, pagesize);
-        System.out.println(list);
-        return list;
+    public List<String> turnPage(int startpage,int pagesize,Model model){
+        System.out.println("正在查询分页");
+        return renterServices.turnPage(startpage, pagesize);
     }
+
+
 
 
 

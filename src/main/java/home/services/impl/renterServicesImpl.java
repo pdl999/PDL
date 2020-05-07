@@ -10,6 +10,7 @@ import home.pojo.house;
 import home.services.renterServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,13 +85,23 @@ public class renterServicesImpl implements renterServices {
     @Override
     public List<String> turnPage(int startpage, int pagesize) {
         List<String> list = new ArrayList<>();
+        QueryWrapper<house> wrapper = new QueryWrapper();
+        wrapper.orderByDesc("uploadTime");
         Page<house> page = new Page<>(startpage,pagesize);
-        IPage<house> houseIPage = houseMapper.selectPage(page, null);
+        IPage<house> houseIPage = houseMapper.selectPage(page, wrapper);
         list.add(String.valueOf(page.hasPrevious()));//是否有上一页
         list.add(String.valueOf(page.hasNext()));//是否有下一页
         list.add(String.valueOf(startpage));//当前页
         list.add(String.valueOf(houseIPage.getPages()));//一共有多少页
         return list;
+    }
+
+    @Override
+    public List<house> perhouse(int startpage, int pagesize, Model model){
+        Object user = model.getAttribute("user");
+//        未完成，等待用户数据
+        return new ArrayList<>();
+
     }
 
 
