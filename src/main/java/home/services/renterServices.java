@@ -2,6 +2,7 @@ package home.services;
 
 import home.pojo.User;
 import home.pojo.house;
+import home.pojo.judgement;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -23,4 +24,13 @@ public interface renterServices {
     List<String> turnPage(int startpage,int pagesize);
     //    main页面的专属推荐
     List<house> perhouse(int startpage, int pagesize, Model model);
+
+
+
+
+
+//    根据id查询具体的房源信息进行展示
+    house detailhouse(int id);
+//    根据房源id查询房源的评价信息
+    List<judgement> getjudge(int houseid);
 }

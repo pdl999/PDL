@@ -149,8 +149,13 @@ public String hostReg(@RequestParam(required = true) String regname,
         return renterServices.turnPage(startpage, pagesize);
     }
 
-
-
+//    跳转到具体的房源信息展示界面
+    @RequestMapping("/housedetail")
+    public String housedetail(int id,Model model){
+        model.addAttribute("detail",renterServices.detailhouse(id));//房源信息
+        model.addAttribute("judgelist",renterServices.getjudge(id));//评价信息
+        return "/detail.html";
+    }
 
 
 

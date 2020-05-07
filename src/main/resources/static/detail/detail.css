@@ -1648,7 +1648,7 @@ p.info strong {
 	padding: 1em;
     width: 65%;
 }
-div#how-to p {
+div.how-to p {
 	margin: 10px 0;
 	line-height: 1.7em;
 	font-size: 0.9em;
@@ -1689,7 +1689,7 @@ p.cr-left {
 	margin-right:1em;
 	margin-bottom:1em;
 }
-div#how-to a {
+div.how-to a {
 	color: #007DD3;
 }
 .media-left.response-text-left {

@@ -86,7 +86,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         var html = "";
                         for (var i=0;i<data.length;i++){
                             html += "<div class='listitem col-md-3' id='" +data[i].houseid+
-                                " '><a href='/detail.html' target='_blank' title='点击了解' alt='点击了解'>" +
+                                " '><a href='/housedetail?id="+data[i].houseid+"' target='_blank' title='点击了解' alt='点击了解'>" +
                                 "<img src='.."+data[i].housepic+"' class='listimg'>\n" +
                                 "</a>" +
                                 "<div class='item_mes'>" +
