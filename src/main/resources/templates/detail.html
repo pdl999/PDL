@@ -66,12 +66,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="grid_3 grid_5">
                     <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" th:text="${detail.housename}"></a></li>
+                            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" th:text="${detail.houseName}"></a></li>
                             <!--  <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">WED-1</a></li>-->
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
-                                <p class="m-s-t" th:text="${detail.houseadder}"></p>
+                                <p class="m-s-t" th:text="${detail.houserAdder}"></p>
                                 <span class="m-s-t">月租：</span><span class="m-s-t" th:text="${detail.pirce}"></span><span class="m-s-t">￥/月</span>
                                 <div class="clearfix"></div>
                                 <a class="more-show-time checkit" href="#" th:id="${detail.houseid}">我要下单</a>

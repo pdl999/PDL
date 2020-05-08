@@ -85,14 +85,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     success: function (data) {
                         var html = "";
                         for (var i=0;i<data.length;i++){
-                            html += "<div class='listitem col-md-3' id='" +data[i].houseid+
-                                " '><a href='/housedetail?id="+data[i].houseid+"' target='_blank' title='点击了解' alt='点击了解'>" +
-                                "<img src='.."+data[i].housepic+"' class='listimg'>\n" +
+                            html += "<div class='listitem col-md-3' id='" +data[i].houseId+
+                                " '><a href='/housedetail?id="+data[i].houseId+"' target='_blank' title='点击了解' alt='点击了解'>" +
+                                "<img src='.."+data[i].housePic+"' class='listimg'>\n" +
                                 "</a>" +
                                 "<div class='item_mes'>" +
-                                "<span class='glyphicon glyphicon-th-large'></span>"+data[i].housename+"</div>\n" +
+                                "<span class='glyphicon glyphicon-th-large'></span>"+data[i].houseName+"</div>\n" +
                                 "<div class='item_mes'>\n" +
-                                " <span class='glyphicon glyphicon-globe'></span>"+data[i].houseadder
+                                " <span class='glyphicon glyphicon-globe'></span>"+data[i].houserAdder
                                 +" </div>\n" +
                                 " <div class='item_mes'>\n" +
                                 " <span class='glyphicon glyphicon-usd'></span>"+data[i].pirce
@@ -193,8 +193,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="tab-content">
                             <div class="tab-pane active" id="Tab1">
                                 <div class="text" style="float: left; display: inline-block;width: 508px; ">
-                                    <h4 class="title" >**[[${hot0.housename}]]**</h4>
-                                    <p>位置：<span th:text="${hot0.houseadder}"></span></p>
+                                    <h4 class="title" >**[[${hot0.houseName}]]**</h4>
+                                    <p>位置：<span th:text="${hot0.houseAdder}"></span></p>
                                     <p>价格：<span th:text="${hot0.pirce}"></span>￥/月</p>
                                     <p class="del">简介：<span th:text="${hot0.details}"></span></p>
                                     <div class="more more2">
@@ -203,13 +203,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                                 <div class="col-md-6  " style="float: right; display: inline-block;width: 400px; overflow: hidden;">
 <!--                                    <img th:src="@{/images/img1.jpg}" alt="" style=" width: 400px;float: right;"/>-->
-                                    <img th:src="@{${hot0.housepic}}" alt="" style=" width: 300px;float: right;"/>
+                                    <img th:src="@{${hot0.housePic}}" alt="" style=" width: 300px;float: right;"/>
                                 </div>
                             </div>
                             <div class="tab-pane" id="Tab2">
                                 <div class="text" style="float: left; display: inline-block;width: 508px; ">
-                                    <h4 class="title">**[[${hot1.housename}]]**</h4>
-                                    <p>位置：<span th:text="${hot1.houseadder}"></span></p>
+                                    <h4 class="title">**[[${hot1.houseName}]]**</h4>
+                                    <p>位置：<span th:text="${hot1.houseAdder}"></span></p>
                                     <p>价格：<span th:text="${hot1.pirce}"></span>￥/月</p>
                                     <p class="del">简介：<span th:text="${hot1.details}"></span></p>
                                     <div class="more more2">
@@ -217,13 +217,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     </div>
                                 </div>
                                 <div class="col-md-6  " style="float: right; display: inline-block;width: 400px;overflow: hidden;">
-                                    <img th:src="@{${hot1.housepic}}" alt="" style=" width: 300px;float: right;"/>
+                                    <img th:src="@{${hot1.housePic}}" alt="" style=" width: 300px;float: right;"/>
                                 </div>
                             </div>
                             <div class="tab-pane" id="Tab3">
                                 <div class="text" style="float: left; display: inline-block;width: 508px; ">
-                                    <h4 class="title">**[[${hot2.housename}]]**</h4>
-                                    <p>位置：<span th:text="${hot2.houseadder}"></span></p>
+                                    <h4 class="title">**[[${hot2.houseName}]]**</h4>
+                                    <p>位置：<span th:text="${hot2.houseAdder}"></span></p>
                                     <p>价格：<span th:text="${hot2.pirce}"></span>￥/月</p>
                                     <p class="del">简介：<span th:text="${hot2.details}"></span></p>
                                     <div class="more more2">
@@ -231,7 +231,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     </div>
                                 </div>
                                 <div class="col-md-6  " style="float: right; display: inline-block;width: 400px;">
-                                    <img th:src="@{${hot2.housepic}}" alt="" style=" width: 400px;float: right;"/>
+                                    <img th:src="@{${hot2.housePic}}" alt="" style=" width: 400px;float: right;"/>
                                 </div>
                             </div>
                         </div>

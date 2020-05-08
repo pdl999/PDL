@@ -1,11 +1,11 @@
-package home.controller;
+package home.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 //最基本的页面跳转
 @Controller
-public class routerController {
+public class RouterController {
 
     @RequestMapping({"/","/index","index.html"})
     public String toIndex(Model model){

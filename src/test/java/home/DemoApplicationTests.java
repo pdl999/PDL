@@ -1,6 +1,6 @@
 package home;
 
-import home.dao.houseMapper;
+import home.dao.HouseMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 class DemoApplicationTests {
 
     @Autowired
-    houseMapper houseMapper;
+    HouseMapper houseMapper;
 
     @Test
     void contextLoads(Model model) {

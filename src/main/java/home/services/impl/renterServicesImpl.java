@@ -3,13 +3,13 @@ package home.services.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import home.dao.houseMapper;
+import home.dao.HouseMapper;
 import home.dao.judgementMapper;
-import home.dao.renterMapper;
 import home.pojo.User;
-import home.pojo.house;
 import home.pojo.judgement;
-import home.services.renterServices;
+import home.dao.RenterMapper;
+import home.pojo.House;
+import home.services.RenterServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -19,12 +19,12 @@ import java.util.List;
 
 @Service
 
-public class renterServicesImpl implements renterServices {
+public class RenterServicesImpl implements RenterServices {
 
     @Autowired
-    private renterMapper renterMapper;
+    private RenterMapper renterMapper;
     @Autowired
-    private houseMapper houseMapper;
+    private HouseMapper houseMapper;
     @Autowired
     private judgementMapper judgementMapper;
 
@@ -69,18 +69,18 @@ public class renterServicesImpl implements renterServices {
 
 //    房源推荐，可以在xml文件中更改检索规则
     @Override
-    public List<house> houseRecomm() {
-        List<house> houses = renterMapper.houseRecomm();
+    public List<House> houseRecomm() {
+        List<House> houses = renterMapper.houseRecomm();
         return houses;
     }
 
 //    最新上架的展示,使用mybatisplus完成降序查询和分页功能
     @Override
-    public List<house> newHouse(int startpage,int pagesize) {
-        QueryWrapper<house> wrapper = new QueryWrapper();
+    public List<House> newHouse(int startpage,int pagesize) {
+        QueryWrapper<House> wrapper = new QueryWrapper();
         wrapper.orderByDesc("uploadTime");
-        Page<house> page = new Page<>(startpage,pagesize);
-        IPage<house> houseIPage = houseMapper.selectPage(page, wrapper);
+        Page<House> page = new Page<>(startpage,pagesize);
+        IPage<House> houseIPage = houseMapper.selectPage(page, wrapper);
         return houseIPage.getRecords();
     }
 
@@ -89,10 +89,10 @@ public class renterServicesImpl implements renterServices {
     @Override
     public List<String> turnPage(int startpage, int pagesize) {
         List<String> list = new ArrayList<>();
-        QueryWrapper<house> wrapper = new QueryWrapper();
+        QueryWrapper<House> wrapper = new QueryWrapper();
         wrapper.orderByDesc("uploadTime");
-        Page<house> page = new Page<>(startpage,pagesize);
-        IPage<house> houseIPage = houseMapper.selectPage(page, wrapper);
+        Page<House> page = new Page<>(startpage,pagesize);
+        IPage<House> houseIPage = houseMapper.selectPage(page, wrapper);
         list.add(String.valueOf(page.hasPrevious()));//是否有上一页
         list.add(String.valueOf(page.hasNext()));//是否有下一页
         list.add(String.valueOf(startpage));//当前页
@@ -101,7 +101,7 @@ public class renterServicesImpl implements renterServices {
     }
 
     @Override
-    public List<house> perhouse(int startpage, int pagesize, Model model){
+    public List<House> perhouse(int startpage, int pagesize, Model model){
         Object user = model.getAttribute("user");
 //        未完成，等待用户数据
         return new ArrayList<>();
@@ -111,10 +111,10 @@ public class renterServicesImpl implements renterServices {
 
 //    查询具体的房源信息
     @Override
-    public house detailhouse(int id) {
-        QueryWrapper<house> wrapper = new QueryWrapper<>();
+    public House detailhouse(int id) {
+        QueryWrapper<House> wrapper = new QueryWrapper<>();
         wrapper.eq("houseId",id);
-        house house = houseMapper.selectOne(wrapper);
+        House house = houseMapper.selectOne(wrapper);
         return houseMapper.selectOne(wrapper);
     }
 

@@ -33,7 +33,10 @@
 
 
                             <li>
-                                <a  th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}"><span data-letters="登录/注册">登录/注册</span></a>
+                                <a  th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}"><span data-letters="登录/注册">
+                                    <span th:if="${session.user?.username} ==null" >注册</span>
+                                    <span th:text="${session.user?.username}" ></span>
+                                </a>
                             </li>
                             <li>
                                 <a  th:href="@{/personal.html}" 	th:class="${flag=='personal'?'link-kumya active':'link-kumya'}"><span data-letters="个人中心">个人中心</span></a>
