@@ -31,15 +31,16 @@
                             <li><a th:href="@{/userback.html}"   th:class="${flag=='userback'?'link-kumya active':'link-kumya'}"><span data-letters="联系我们">联系我们</span></a></li>
 
 
+                            <li>
+                                <a  th:href="@{/personal.html}" 	th:class="${flag=='personal'?'link-kumya active':'link-kumya'}"><span data-letters="个人中心">个人中心</span></a>
+                            </li>
+
 
                             <li>
                                 <a  th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}">
                                     <span th:if="${session.user?.username} ==null" data-letters="登录/注册" >登录/注册</span>
-                                    <span th:text="${session.user?.username}" ></span>
+                                    <span th:if="${session.user?.username} !=null">当前用户:<span th:text="${session.user?.username}" ></span></span>
                                 </a>
-                            </li>
-                            <li>
-                                <a  th:href="@{/personal.html}" 	th:class="${flag=='personal'?'link-kumya active':'link-kumya'}"><span data-letters="个人中心">个人中心</span></a>
                             </li>
 <!--                            <li >-->
 <!--                                <a th:if="${per==1}" th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}"><span data-letters="登录/注册">登录/注册</span></a>-->

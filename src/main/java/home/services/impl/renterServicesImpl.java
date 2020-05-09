@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import home.dao.HouseMapper;
-import home.dao.judgementMapper;
+import home.dao.JudgementMapper;
 import home.pojo.User;
-import home.pojo.judgement;
+import home.pojo.Judgement;
 import home.dao.RenterMapper;
 import home.pojo.House;
 import home.services.RenterServices;
@@ -26,7 +26,7 @@ public class RenterServicesImpl implements RenterServices {
     @Autowired
     private HouseMapper houseMapper;
     @Autowired
-    private judgementMapper judgementMapper;
+    private JudgementMapper judgementMapper;
 
 
 //    用户登录，匹配用户名和密码
@@ -120,9 +120,9 @@ public class RenterServicesImpl implements RenterServices {
 
 //    获取房源的评价信息
     @Override
-    public List<judgement> getjudge(int houseid) {
-        QueryWrapper<judgement> wrapper = new QueryWrapper<>();
-        wrapper.eq("houseid",houseid);
+    public List<Judgement> getjudge(int houseId) {
+        QueryWrapper<Judgement> wrapper = new QueryWrapper<>();
+        wrapper.eq("houseId",houseId);
         return judgementMapper.selectList(wrapper);
     }
 
