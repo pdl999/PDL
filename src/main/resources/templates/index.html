@@ -58,9 +58,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<li><a th:href="@{/index.html}" 	   class="link-kumya active scroll"><span data-letters="首页">首页</span></a></li>
 								<li><a th:href="@{/houselist}" 	    class="link-kumya"><span data-letters="大厅">大厅</span></a></li>
 								<li><a th:href="@{/userback.html}"    class="link-kumya"><span data-letters="联系我们">联系我们</span></a></li>
-								<li><a th:href="@{/login.html}" 	   class="link-kumya">
+								<li th:if="${session.user?.username} !=null">
+									<a  th:href="@{/personal.html}" 	th:class="${flag=='personal'?'link-kumya active':'link-kumya'}"><span data-letters="个人中心">个人中心</span></a>
+								</li>
+								<li><a th:href="@{/login.html}" 	   class="link-kumya"><span >
                                     <span th:if="${session.user?.username} ==null" data-letters="登录/注册" >登录/注册</span>
-                                    <span th:text="${session.user?.username}" ></span>
+                                    <span th:if="${session.user?.username} !=null">当前用户:<span th:text="${session.user?.username}" ></span></span>
                                 </span></a></li>
 							</ul>
 							<div class="clearfix"> </div>
