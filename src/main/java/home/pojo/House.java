@@ -14,7 +14,7 @@ import java.util.Date;
 @TableName("house")//设置对象名和表明对应
 public class House {
 
-    private int houseId;
+    private Integer houseId;
     public  String houseName;
     private  String houseAdder;
     private  double pirce;
