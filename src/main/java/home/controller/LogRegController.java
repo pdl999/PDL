@@ -145,14 +145,13 @@ public String hostReg(@RequestParam(required = true) String regname,
     @ResponseBody
     public List<String> turnPage(int startpage,int pagesize,Model model){
         System.out.println("正在查询分页");
-        System.out.println("tip+"+model.getAttribute("tip"));
-        System.out.println("user+"+model.getAttribute("user"));
         return renterServices.turnPage(startpage, pagesize);
     }
 
 //    跳转到具体的房源信息展示界面
     @RequestMapping("/housedetail")
     public String housedetail(int id,Model model){
+        System.out.println("详情页面开始跳转");
         model.addAttribute("detail",renterServices.detailhouse(id));//房源信息
         model.addAttribute("judgelist",renterServices.getjudge(id));//评价信息
         return "/detail.html";
