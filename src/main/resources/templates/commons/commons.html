@@ -31,7 +31,7 @@
                             <li><a th:href="@{/userback.html}"   th:class="${flag=='userback'?'link-kumya active':'link-kumya'}"><span data-letters="联系我们">联系我们</span></a></li>
 
 
-                            <li>
+                            <li th:if="${session.user?.username} !=null">
                                 <a  th:href="@{/personal.html}" 	th:class="${flag=='personal'?'link-kumya active':'link-kumya'}"><span data-letters="个人中心">个人中心</span></a>
                             </li>
 
