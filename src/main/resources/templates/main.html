@@ -63,12 +63,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 if($(this).index()==0){
                     $(".f-nav").attr('id','/newhouse');
                     $(".cpage").attr("id","/turnpage");
+                    checkHouse(1,"/newhouse");
+                    turnPage(1,"/turnpage");
                 }else if($(this).index()==1){
                     $(".f-nav").attr('id','/perhouse');
-                    $(".cpage").attr("id","/turnpage2")
+                    $(".cpage").attr("id","/turnpage2");
+                    checkHouse(1,"/perhouse");
+                    turnPage(1,"/turnpage2");
                 }else if($(this).index()==2){
                     $(".f-nav").attr('id','/allhouse');
-                    $(".cpage").attr("id","/turnpage3")
+                    $(".cpage").attr("id","/turnpage3");
+                    checkHouse(1,"/allhouse");
+                    turnPage(1,"/turnpage3");
                 }
             })
 
@@ -115,7 +121,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     },
                     success: function (data) {
                         var html = "";
-                        html += "<p>当前<span class='nowpage'>"+data[2]+"</span>页/共<span class='tolpage'>"+data[3]+"</span>页</p>";
+                        html += "<p>当前<span class='nowpage'>"+data[0]+"</span>页/共<span class='tolpage'>"+data[1]+"</span>页</p>";
                         $(".cpage p").html(html);
                     }
                 });

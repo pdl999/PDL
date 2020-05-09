@@ -1,10 +1,10 @@
 package home.services;
 
+import home.pojo.House;
 import home.pojo.Judgement;
 import home.pojo.User;
-import home.pojo.House;
-import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface RenterServices {
@@ -23,7 +23,8 @@ public interface RenterServices {
 //    控制分页按钮和页码显示
     List<String> turnPage(int startpage,int pagesize);
     //    main页面的专属推荐
-    List<House> perhouse(int startpage, int pagesize, Model model);
+    List<House> perhouse(int startpage, int pagesize, HttpSession session);
+    List<String> turnPage2(int startpage, int pagesize, HttpSession session);
 
 
 

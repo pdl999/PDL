@@ -27,7 +27,6 @@ public class LogRegController {
     public String renterLogin(String renterLogname, String renterLogpwd,HttpSession session,Model model){
         System.out.println("开始执行登录流程+++++++++++++++");
         User user = renterServices.renterLogin(renterLogname,renterLogpwd);
-        System.out.println("tip"+session.getAttribute("tip"));
         if (user!=null){
 //            查询结果不为空，登录成功
             session.setAttribute("user",user);//存放用户信息
@@ -151,16 +150,30 @@ public String hostReg(@RequestParam(required = true) String regname,
 
 //    跳转到具体的房源信息展示界面
     @RequestMapping("/housedetail")
-    public String housedetail(int id,Model model){
-        System.out.println("详情页面开始跳转");
+    public String housedetail(int id,Model model,HttpSession session){
+        System.out.println("详情页面开始跳转"+session.getAttribute("user"));
         model.addAttribute("detail",renterServices.detailhouse(id));//房源信息
         model.addAttribute("judgelist",renterServices.getjudge(id));//评价信息
         return "/detail.html";
     }
 
 
-
-
+    //    加载main页面中煮熟推荐的房源信息
+    @RequestMapping("/perhouse")
+    @ResponseBody
+    public List<House> perhouse(int startpage,int pagesize,HttpSession session){
+        System.out.println("刷新专属推荐房源信息");
+        System.out.println(renterServices.perhouse(startpage,pagesize,session));
+        return renterServices.perhouse(startpage,pagesize,session);
+    }
+    //    控制显示页面的时候，下方的页数显示
+    @RequestMapping("/turnpage2")
+    @ResponseBody
+    public List<String> turnpage2(int startpage,int pagesize,HttpSession session){
+        System.out.println("正在查询专属分页");
+        System.out.println(renterServices.turnPage2(startpage, pagesize,session)+"每页显示记录条数："+pagesize);
+        return renterServices.turnPage2(startpage, pagesize,session);
+    }
 
 
 

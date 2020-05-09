@@ -5,15 +5,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import home.dao.HouseMapper;
 import home.dao.JudgementMapper;
-import home.pojo.User;
-import home.pojo.Judgement;
 import home.dao.RenterMapper;
 import home.pojo.House;
+import home.pojo.Judgement;
+import home.pojo.User;
 import home.services.RenterServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +79,7 @@ public class RenterServicesImpl implements RenterServices {
     public List<House> newHouse(int startpage,int pagesize) {
         QueryWrapper<House> wrapper = new QueryWrapper();
         wrapper.orderByDesc("uploadTime");
+        wrapper.eq("status","招租");
         Page<House> page = new Page<>(startpage,pagesize);
         IPage<House> houseIPage = houseMapper.selectPage(page, wrapper);
         return houseIPage.getRecords();
@@ -91,22 +92,15 @@ public class RenterServicesImpl implements RenterServices {
         List<String> list = new ArrayList<>();
         QueryWrapper<House> wrapper = new QueryWrapper();
         wrapper.orderByDesc("uploadTime");
+        wrapper.eq("status","招租");
         Page<House> page = new Page<>(startpage,pagesize);
         IPage<House> houseIPage = houseMapper.selectPage(page, wrapper);
-        list.add(String.valueOf(page.hasPrevious()));//是否有上一页
-        list.add(String.valueOf(page.hasNext()));//是否有下一页
         list.add(String.valueOf(startpage));//当前页
         list.add(String.valueOf(houseIPage.getPages()));//一共有多少页
         return list;
     }
 
-    @Override
-    public List<House> perhouse(int startpage, int pagesize, Model model){
-        Object user = model.getAttribute("user");
-//        未完成，等待用户数据
-        return new ArrayList<>();
 
-    }
 
 
 //    查询具体的房源信息
@@ -117,7 +111,6 @@ public class RenterServicesImpl implements RenterServices {
         House house = houseMapper.selectOne(wrapper);
         return houseMapper.selectOne(wrapper);
     }
-
 //    获取房源的评价信息
     @Override
     public List<Judgement> getjudge(int houseId) {
@@ -125,6 +118,63 @@ public class RenterServicesImpl implements RenterServices {
         wrapper.eq("houseId",houseId);
         return judgementMapper.selectList(wrapper);
     }
+//实现专属推荐功能
+    @Override
+    public List<House> perhouse(int startpage, int pagesize, HttpSession session){
+        List<House> houseslist = new ArrayList<>();
+        User user = (User) session.getAttribute("user");
+        String[] str = user.getTags().split("\\*");
+        for (String s : str) {
+            QueryWrapper<House> wrapper = new QueryWrapper();
+            wrapper.eq("status","招租");
+            wrapper.like("tagsList",s);
+            Page<House> page = new Page<>(startpage,pagesize);
+
+            for (House house : houseMapper.selectList(wrapper)) {
+                if (houseslist.contains(house)){}//重复的数据不会再次添加
+                else{houseslist.add(house);}
+            }
+        }
+        return houseslist;
+    }
+
+
+
+    //    控制下面的翻页按钮和页码显示
+    @Override
+    public List<String> turnPage2(int startpage, int pagesize,HttpSession session) {
+        List<String> list = new ArrayList<>();
+        List<House> houseslist = new ArrayList<>();
+        User user = (User) session.getAttribute("user");
+        String[] str = user.getTags().split("\\*");
+        for (String s : str) {
+            QueryWrapper<House> wrapper = new QueryWrapper();
+            wrapper.eq("status","招租");
+            wrapper.like("tagsList",s);
+            Page<House> page = new Page<>(startpage,pagesize);
+            for (House house : houseMapper.selectPage(page, wrapper).getRecords()) {
+                if (houseslist.contains(house)){}//重复的数据不会再次添加
+                else{houseslist.add(house);}
+            }
+        }
+        list.add(String.valueOf(startpage));//当前页
+        int pagetol = 0;
+        if (houseslist.size()%pagesize>0){
+            list.add(String.valueOf(houseslist.size()/pagesize+1));//一共有多少页
+        }else{
+            list.add(String.valueOf(houseslist.size()));
+        }
+        return list;
+    }
+
+
+
+
+
+
+
+
+
 
 
 }
