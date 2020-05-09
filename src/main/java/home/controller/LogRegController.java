@@ -24,7 +24,7 @@ public class LogRegController {
 
 //    租客登录
     @RequestMapping("/renter/login")
-    public String renterLogin(String renterLogname, String renterLogpwd,HttpSession session){
+    public String renterLogin(String renterLogname, String renterLogpwd,HttpSession session,Model model){
         System.out.println("开始执行登录流程+++++++++++++++");
         User user = renterServices.renterLogin(renterLogname,renterLogpwd);
         System.out.println("tip"+session.getAttribute("tip"));
@@ -34,11 +34,11 @@ public class LogRegController {
             List<House> houses = renterServices.houseRecomm();
             for (int i=0;i<3;i++){
                 String hot = "hot"+i;
-                session.setAttribute(hot,houses.get(i));
+                model.addAttribute(hot,houses.get(i));
             }
             return "/main";
         }else{
-            session.setAttribute("tip","用户名或密码错误");//存放登录失败提示信息
+            model.addAttribute("tip","用户名或密码错误");//存放登录失败提示信息
             return  "/login";
         }
     }
