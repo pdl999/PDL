@@ -35,6 +35,7 @@ public class LogRegController {
             for (int i=0;i<3;i++){
                 String hot = "hot"+i;
                 model.addAttribute(hot,houses.get(i));
+                System.out.println(houses.get(i).getHouseId());
             }
             return "/main";
         }else{

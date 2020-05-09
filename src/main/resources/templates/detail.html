@@ -71,10 +71,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
-                                <p class="m-s-t" th:text="${detail.houserAdder}"></p>
+                                <p class="m-s-t" th:text="${detail.houseAdder}"></p>
                                 <span class="m-s-t">月租：</span><span class="m-s-t" th:text="${detail.pirce}"></span><span class="m-s-t">￥/月</span>
                                 <div class="clearfix"></div>
-                                <a class="more-show-time checkit" href="#" th:id="${detail.houseid}">我要下单</a>
+                                <a class="more-show-time checkit" href="#" th:id="${detail.houseId}">我要下单</a>
                             </div>
 
                         </div>
@@ -111,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $().UItoTop({ easingType: 'easeOutQuart' });
 
         $(".checkit").on("click",function () {
-            var houseid = $(".checkit").attr("id");//房子的id
+            var houseId = $(".checkit").attr("id");//房子的id
             // $.ajax({
             //     type: "post",
             //     url: "/renthouse",    //租房请求

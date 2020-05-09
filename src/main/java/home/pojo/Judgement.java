@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Judgement{
     private int jId;
-    private String jContent;
-    private Date jTime;
+    private String jcontent;
+    private Date jtime;
     private int houseId;
 }
