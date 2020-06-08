@@ -29,6 +29,6 @@ public class House {
     private String status;//房源的状态
     private String adminaudit;//管理员对房屋的审核
     private String housePic;//图片路径
-
+    private String tagsListArray[];
 
 }

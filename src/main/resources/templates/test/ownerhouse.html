@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleafthymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>AdminLTE | 我的房屋</title>
@@ -260,36 +260,24 @@
                         <span th:if="${session.user?.username} !=null"><span th:text="${session.user?.username}" ></span></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header bg-light-blue">
-                            <img src="/img/avatar3.png" class="img-circle" alt="User Image" />
-                            <p>
-                                <span th:if="${session.user?.username} !=null"><span th:text="${session.user?.username}" ></span></span>
-                                <small>Member since Nov. 2012</small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                            </div>
-                        </li>
-                    </ul>
+    <!-- User image -->
+    <li class="user-header bg-light-blue">
+        <img th:src="${session.user?.picUrl}" class="img-circle" alt="User Image" />
+        <p>
+            <span th:if="${session.user?.username} !=null"><span th:text="${session.user?.username}" ></span></span>
+            <small>房东</small>
+        </p>
+    </li>
+    <!-- Menu Body -->
+    <li class="user-body">
+
+        <div class="col-xs-4 text-center">
+            <a  th:href="@{/logout}">退出</a>
+        </div>
+
+    </li>
+
+</ul>
                 </li>
             </ul>
         </div>
@@ -342,11 +330,10 @@
 
                 </li>
                 <li class="active">
-                    <a href="#">
+                    <a href="javascript:alert('还未开发完成')">
                         <i class="fa fa-edit"></i> <span>平台</span>
                         <small class="badge pull-right bg-green">新版</small>
                     </a>
-
                 </li>
 
             </ul>
@@ -414,15 +401,11 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
-                                <tr>
-                                    <th style="width:50%">上班族</th>
-                                </tr>
-                                <tr>
-                                    <th>单身</th>
-                                </tr>
-                                <tr>
-                                    <th>单身</th>
-                                </tr>
+                                    <div th:each="tangs:${ownerdetail.tagsListArray}">
+                                        <tr>
+                                            <th style="width:50%;font-size:20px"  th:text="${tangs}"></th><br>
+                                        </tr>
+                                    </div>
                                 </tbody>
                             </table>
                         </div>
@@ -472,6 +455,7 @@
 
 
                         <span th:if="${ownerdetail.status} eq '被租'">
+
                         </span>
 
 
@@ -480,6 +464,11 @@
                         </span>
 
                         <span th:if="${ownerdetail.status} eq '下架'">
+                            <a th:href="@{/owner/uploadHouse(houseId=${ownerdetail.houseId})}"  style="color:white">上架</a>
+                        </span>
+                    </button>
+                    <button  class="pull-right btn-primary btn" style="margin-right: 5px;">
+                        <span>
                             <a th:href="@{/owner/xiugai(houseId=${ownerdetail.houseId})}"  style="color:white">修改</a>
                         </span>
 

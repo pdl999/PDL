@@ -261,36 +261,24 @@
 
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header bg-light-blue">
-                            <img src="/img/avatar3.png" class="img-circle" alt="User Image" />
-                            <p>
-                                <span th:if="${session.user?.username} !=null"><span th:text="${session.user?.username}" ></span></span>
-                                <small>Member since Nov. 2012</small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                            </div>
-                        </li>
-                    </ul>
+    <!-- User image -->
+    <li class="user-header bg-light-blue">
+        <img th:src="${session.user?.picUrl}" class="img-circle" alt="User Image" />
+        <p>
+            <span th:if="${session.user?.username} !=null"><span th:text="${session.user?.username}" ></span></span>
+            <small>房东</small>
+        </p>
+    </li>
+    <!-- Menu Body -->
+    <li class="user-body">
+
+        <div class="col-xs-4 text-center">
+            <a  th:href="@{/logout}">退出</a>
+        </div>
+
+    </li>
+
+</ul>
                 </li>
             </ul>
         </div>
@@ -343,12 +331,11 @@
 
                 </li>
                 <li class="active">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>平台</span>
-                        <small class="badge pull-right bg-green">新版</small>
-                    </a>
-
-                </li>
+    <a href="javascript:alert('还未开发完成')">
+        <i class="fa fa-edit"></i> <span>平台</span>
+        <small class="badge pull-right bg-green">新版</small>
+    </a>
+</li>
 
             </ul>
         </section>

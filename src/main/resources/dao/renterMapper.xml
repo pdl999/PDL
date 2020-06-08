@@ -44,5 +44,10 @@
         SELECT MAX(houseid) as houseId FROM house
     </select>
 
+    <update id="uploadHouse" >
+        UPDATE house SET status="等待",adminaudit="等待审核"
+        where houseId=#{houseId}
+    </update>
+
 
 </mapper>

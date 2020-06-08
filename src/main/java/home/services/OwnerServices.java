@@ -20,7 +20,22 @@ public interface OwnerServices {
 
     House xiaJiaOwnerHouseDetail(Integer houseId);
 
+    House uploadHouse(Integer houseId);
+
     House modifyHouse(Integer houseId, String houseAdder, String houseName, String pirce, String tagList, String details);
 
     House addHouse(HttpSession session, String houseAdder, String houseName, String pirce, String tagsList, String details);
+
+    List<String> turnpageShow(int startpage, int pagesize, HttpSession session);
+
+    List<String> turnpageZhaoZu(int startpage, int pagesize, HttpSession session);
+
+    List<String> turnpageBeiZu(int startpage, int pagesize, HttpSession session);
+
+    List<String> turnpageDengDai(int startpage, int pagesize, HttpSession session);
+
+    List<String> turnpageXiaJia(int startpage, int pagesize, HttpSession session);
+
+
+
 }

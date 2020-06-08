@@ -89,6 +89,11 @@ public class OwnerController {
         return "/test/pages/xiugai.html";
     }
 
+    @RequestMapping({"/owner/uploadHouse"})
+    public String uploadHouse(Integer houseId, Model model, HttpSession session) {
+        model.addAttribute("ownerdetail", this.ownerServices.uploadHouse(houseId));
+        return "/test/ownerhouse.html";
+    }
     @RequestMapping({"/owner/modifyHouse"})
     public String ownerHouseModify(Integer houseId, String houseAdder, String houseName, String pirce, String tagsList, String details, Model model, HttpSession session) {
         model.addAttribute("ownerdetail", this.ownerServices.modifyHouse(houseId, houseAdder, houseName, pirce, tagsList, details));
@@ -100,4 +105,34 @@ public class OwnerController {
         model.addAttribute("ownerdetail", this.ownerServices.addHouse(session, houseAdder, houseName, pirce, tagsList, details));
         return "/test/ownerhouse.html";
     }
+
+    @RequestMapping("/owner/turnpage/show")
+    @ResponseBody
+    public List<String> turnpageShow(int startpage,int pagesize,HttpSession session){
+        return ownerServices.turnpageShow(startpage,pagesize,session);
+    }
+    @RequestMapping("/owner/turnpage/beizu")
+    @ResponseBody
+    public List<String> turnpageBeiZu(int startpage,int pagesize,HttpSession session){
+        return ownerServices.turnpageBeiZu(startpage,pagesize,session);
+    }
+
+    @RequestMapping("/owner/turnpage/dengdai")
+    @ResponseBody
+    public List<String> turnpageDengDai(int startpage,int pagesize,HttpSession session){
+        return ownerServices.turnpageDengDai(startpage,pagesize,session);
+    }
+
+    @RequestMapping("/owner/turnpage/xiajia")
+    @ResponseBody
+    public List<String> turnpageXiaJia(int startpage,int pagesize,HttpSession session){
+        return ownerServices.turnpageXiaJia(startpage,pagesize,session);
+    }
+    @RequestMapping("/owner/turnpage/zhaozu")
+    @ResponseBody
+    public List<String> turnpageZhaoZu(int startpage,int pagesize,HttpSession session){
+        return ownerServices.turnpageZhaoZu(startpage,pagesize,session);
+    }
+
+
 }

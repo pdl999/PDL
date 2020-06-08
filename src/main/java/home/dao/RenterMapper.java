@@ -29,4 +29,6 @@ public interface RenterMapper extends BaseMapper<House> {
     boolean addHouse(String houseAdder, String houseName, String pirce, String tagsList, String details, Integer userId);
 
     Integer selectLastOneHouseId();
+
+    boolean uploadHouse(Integer houseId);
 }
