@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="home.dao.HouseMapper">
+
+
+    <select id="selectHousePage" resultType="home.pojo.House">
+        SELECT * FROM house WHERE
+        <foreach  collection="tagsList" index="index" item="item" open="" close=" " separator="or">
+            tagsList LIKE CONCAT("%",#{item},"%")
+        </foreach>
+
+    </select>
+
+    <select id="selectOwnerHouse" resultType="home.pojo.House">
+        SELECT * FROM house WHERE OWNER=#{userId}
+    </select>
+
+    <select id="showStatusList" resultType="home.pojo.House">
+        SELECT * FROM house WHERE OWNER=#{userId} and status=#{status}
+    </select>
+</mapper>
