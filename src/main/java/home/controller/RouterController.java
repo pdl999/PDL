@@ -3,7 +3,7 @@ package home.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-//最基本的页面跳转
+//页面跳转
 @Controller
 public class RouterController {
 
@@ -40,5 +40,22 @@ public class RouterController {
     @RequestMapping("/host.html")
     public String toHost(){
         return "host";
+    }
+
+    @RequestMapping("/admin/login")
+    public String toAdminLogin(){
+        return "adm/adminLogin";
+    }
+
+    @RequestMapping("/admin/index")
+    public String toAdminIndex(){
+        System.out.println("管理员首页");
+        return "adm/admin";
+    }
+
+    @RequestMapping("/admin/houseaudit")
+    public String toAdminHouseaudit(){
+        System.out.println("跳转到房屋审核");
+        return "adm/houseAudit";
     }
 }

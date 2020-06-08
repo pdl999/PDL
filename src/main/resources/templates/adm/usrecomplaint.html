@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户反馈信息</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- bootstrap 3.0.2 -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+    <!-- font Awesome -->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link th:href="@{/css/ionicons.min.css}" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link th:href="@{/css/AdminLTE.css}" rel="stylesheet" type="text/css" />
+
+    <!-- jQuery 2.0.2 -->
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <!-- jQuery UI 1.10.3 -->
+    <!-- Bootstrap -->
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/js/AdminLTE/app.js}" type="text/javascript"></script>
+    <script type="text/javascript">
+
+
+    </script>
+
+</head>
+<body class="skin-blue">
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+    <a href="index.html" class="logo">
+        后台管理
+    </a>
+    <div th:insert="~{adm/admincommons::admintopbar}"></div>
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="left-side sidebar-offcanvas">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div th:insert="~{adm/admincommons::adminsiderbar(adminflag='houseaudit')}"></div>
+    </aside>
+
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+
+
+        <!-- 主要内容显示 -->
+        <section class="content">
+
+
+            <div class="col-md-12" style="border-bottom: 1px solid #9d9d9d;">
+                <p style="line-height: 100%;">当前位置：用户反馈（显示未处理过的反馈信息）</p>
+            </div>
+
+            <div class="col-md-12" style="margin-top: 20px;">
+<!--                <a class="btn btn-danger"  th:href="@{/admin/nocheckcomp}">查看未处理</a>-->
+            </div>
+
+            <div class="col-sm-12" style="margin-top: 20px;">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                       cellspacing="0" width="100%" role="grid" aria-describedby="datatable-responsive_info" style="width: 100%;">
+                    <thead>
+                    <tr role="row">
+                        <th class="sorting_asc" tabindex="0"
+                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                            style="width: 50px;" aria-label="First name: activate to sort column descending"
+                            aria-sort="ascending">信息编码</th>
+                        <th class="sorting" tabindex="0"
+                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                            style="width: 50px;"
+                            aria-label="Last name: activate to sort column ascending">
+                            反馈时间</th>
+                        <th class="sorting" tabindex="0"
+                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                            style="width: 30px;"
+                            aria-label="Last name: activate to sort column ascending">
+                            内容</th>
+                        <th class="sorting" tabindex="0"
+                            aria-controls="datatable-responsive" rowspan="1" colspan="1"
+                            style="width: 30px;"
+                            aria-label="Last name: activate to sort column ascending">
+                            处理操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody" th:each="comp:${compmes}">
+<!--                    展示区域-->
+                        <tr role="row" class="odd">
+                            <td tabindex="0" class="sorting_1" th:text="${comp.getComplaintId()}"></td>
+                            <td th:text="${#dates.format(comp.getTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td th:text="${comp.getContent()}"></td>
+                            <td>
+                                <button class="btn btn-success" >
+                                    <a th:class="${comp.getComplaintId()}"  style="color: white;" th:href="@{/admin/docomp(compid=${comp.getComplaintId()})}">点击处理</a>
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <!--            翻页按钮-->
+                <div class="col-md-12 cpage" id="aupage" style="text-align: center;">
+                    <button class="btn btn-default prepage" style="line-height: 50px;" ><a th:href="@{/admin/usrecomplaint(startpage=${compnowpage}-1)}">上一页</a></button>
+                    <span style="display: inline-block;">当前[[${compnowpage}]]页</span>
+                    <span style="display: inline-block;"> / 共[[${comptolpage}]]页</span>
+                    <button class="btn btn-default nextpage" style="line-height: 50px;"><a th:href="@{/admin/usrecomplaint(startpage=${compnowpage}+1)}">下一页</a></button>
+                </div>
+            </div>
+
+
+
+        </section><!-- /.content -->
+    </aside><!-- /.right-side -->
+</div><!-- ./wrapper -->
+
+
+
+
+
+</body>
+</html>

@@ -36,26 +36,24 @@
                             </li>
 
 
-                            <li>
+<!--                            <li>-->
+<!--                                <a  th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}">-->
+<!--                                    <span th:if="${session.user?.username} ==null" data-letters="登录/注册" >登录/注册</span>-->
+<!--                                    <span th:if="${session.user?.username} !=null">当前用户:<span th:text="${session.user?.username}" ></span></span>-->
+<!--                                </a>-->
+<!--                            </li>-->
+
+                            <li th:if="${session.user?.username} ==null">
                                 <a  th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}">
                                     <span th:if="${session.user?.username} ==null" data-letters="登录/注册" >登录/注册</span>
                                     <span th:if="${session.user?.username} !=null">当前用户:<span th:text="${session.user?.username}" ></span></span>
                                 </a>
                             </li>
-<!--                            <li >-->
-<!--                                <a th:if="${per==1}" th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}"><span data-letters="登录/注册">登录/注册</span></a>-->
-<!--                                <a th:if="${per==3}" th:href="@{/personal.html}" 	th:class="${flag=='personal'?'link-kumya active':'link-kumya'}"><span data-letters="个人中心">个人中心</span></a>-->
-<!--&lt;!&ndash;                                <a th:case="'*'" th:href="@{/login.html}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}"><span data-letters="登录/注册">登录/注册</span></a>&ndash;&gt;-->
-<!--                            </li>-->
-
-
-
-
-
-
-
-
-
+                            <li th:if="${session.user?.username} !=null" title="退出登录">
+                                <a  th:href="@{/logout}" 	th:class="${flag=='login'?'link-kumya active':'link-kumya'}">
+                                    <span th:if="${session.user?.username} !=null">当前用户:<span th:text="${session.user?.username}" ></span></span>
+                                </a>
+                            </li>
 
 
 
@@ -92,9 +90,9 @@
         </div>
         <div class="col-md-5 footer-grids">
             <h3>Flickr</h3>
-            <a  class="footer-img" href="single.html"> <img src="../static/images/f1.jpg" alt=""/></a>
-            <a class="footer-img" href="single.html"> <img src="../static/images/f2.jpg" alt=""/></a>
-            <a class="footer-img" href="single.html"> <img src="../static/images/f3.jpg" alt=""/></a>
+            <a  class="footer-img" href="#"> <img src="../static/images/f1.jpg" alt=""/></a>
+            <a class="footer-img" href="#"> <img src="../static/images/f2.jpg" alt=""/></a>
+            <a class="footer-img" href="#"> <img src="../static/images/f3.jpg" alt=""/></a>
         </div>
         <div class="clearfix"> </div>
         <div class="footer-copy">

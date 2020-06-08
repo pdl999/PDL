@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 //处理房东和租户的登录和注册
@@ -22,7 +23,7 @@ public class LogRegController {
     private RenterServices renterServices;
 
 
-//    租客登录
+    //    租客登录
     @RequestMapping("/renter/login")
     public String renterLogin(String renterLogname, String renterLogpwd,HttpSession session,Model model){
         System.out.println("开始执行登录流程+++++++++++++++");
@@ -43,7 +44,7 @@ public class LogRegController {
         }
     }
 
-//    租客注册
+    //    租客注册
     @RequestMapping("/renter/reg")
     public String renterReg(@RequestParam(required = true) String regname,
                             @RequestParam(required = true) String regpwd,
@@ -74,51 +75,61 @@ public class LogRegController {
     }
 
 
-//  房东注册
-@RequestMapping("/host/reg")
-public String hostReg(@RequestParam(required = true) String regname,
-                        @RequestParam(required = true) String regpwd,
-                        @RequestParam(required = true) String optionsRadios,
-                        @RequestParam(required = true) String[] tags,
-                        @RequestParam(required = true) String phone,
-                        HttpServletRequest request,Model model){
-    tags = request.getParameterValues("tags");//拿到房东的个人标签数组
-    String taglist = "";
-    for (String tag : tags) { taglist = taglist+tag+"*"; }//将数组转化成字符串
-    User user = new User();
-    user.setUsername(regname);
-    user.setPwd(regpwd);
-    user.setPhone(phone);
-    user.setSex(optionsRadios);
-    user.setTags(taglist);
-    user.setPicUrl("http://pig.stadc.cn/back.jpg");
-    user.setIsOwner("房东");
+    //  房东注册
+    @RequestMapping("/host/reg")
+    public String hostReg(@RequestParam(required = true) String regname,
+                          @RequestParam(required = true) String regpwd,
+                          @RequestParam(required = true) String optionsRadios,
+                          @RequestParam(required = true) String[] tags,
+                          @RequestParam(required = true) String phone,
+                          HttpServletRequest request,Model model){
+        tags = request.getParameterValues("tags");//拿到房东的个人标签数组
+        String taglist = "";
+        for (String tag : tags) { taglist = taglist+tag+"*"; }//将数组转化成字符串
+        User user = new User();
+        user.setUsername(regname);
+        user.setPwd(regpwd);
+        user.setPhone(phone);
+        user.setSex(optionsRadios);
+        user.setTags(taglist);
+        user.setPicUrl("http://pig.stadc.cn/back.jpg");
+        user.setIsOwner("房东");
 
-    int i = renterServices.hostReg(user);
-    if (i==0){
-        model.addAttribute("regtip","注册失败，请重新操作");
-        return "/login";
-    }else{
-        model.addAttribute("regtip","注册成功，可以登录");
-        return "/login";
+        int i = renterServices.hostReg(user);
+        if (i==0){
+            model.addAttribute("regtip","注册失败，请重新操作");
+            return "/login";
+        }else{
+            model.addAttribute("regtip","注册成功，可以登录");
+            return "/login";
+        }
     }
-}
 
-// 管理员登录
+    // 管理员登录
     @RequestMapping("/host/login")
-    public String hostLogin(String renterLogname, String renterLogpwd, Model model){
+    public String hostLogin(String renterLogname, String renterLogpwd, Model model,HttpSession session){
         User user = renterServices.hostLogin(renterLogname,renterLogpwd);
         System.out.println(user);
         if (user!=null){
+            session.setAttribute("user",user);
 //            查询结果不为空，登录成功
             model.addAttribute("user",user);//存放用户信息
             model.addAttribute("tip","");
-            return "redirect:/host.html";
+            return "/test/index";
         }else{
             model.addAttribute("tip","用户名或密码错误");//存放登录失败提示信息
             return "/login";
         }
     }
+
+
+    //    租户退出登录
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();//清空session
+        return "/index.html";
+    }
+
 
 
     //    初始化main页面中热推户型的操作，可以在xml中更改推荐房源的检索规则
@@ -133,6 +144,15 @@ public String hostReg(@RequestParam(required = true) String regname,
     }
 
 
+
+    //    跳转到具体的房源信息展示界面
+    @RequestMapping("/housedetail")
+    public String housedetail(int id,Model model,HttpSession session){
+        model.addAttribute("detail",renterServices.detailhouse(id));//房源信息
+        model.addAttribute("judgelist",renterServices.getjudge(id));//评价信息
+        return "/detail.html";
+    }
+
     //    加载main页面中最新上架的房源信息，通过将房源时间降序排序
     @RequestMapping("/newhouse")
     @ResponseBody
@@ -140,7 +160,7 @@ public String hostReg(@RequestParam(required = true) String regname,
         System.out.println("刷新房源信息");
         return renterServices.newHouse(startpage,pagesize);
     }
-//    控制显示页面的时候，下方的页数显示
+    //    控制显示页面的时候，下方的页数显示
     @RequestMapping("/turnpage")
     @ResponseBody
     public List<String> turnPage(int startpage,int pagesize,Model model){
@@ -148,17 +168,7 @@ public String hostReg(@RequestParam(required = true) String regname,
         return renterServices.turnPage(startpage, pagesize);
     }
 
-//    跳转到具体的房源信息展示界面
-    @RequestMapping("/housedetail")
-    public String housedetail(int id,Model model,HttpSession session){
-        System.out.println("详情页面开始跳转"+session.getAttribute("user"));
-        model.addAttribute("detail",renterServices.detailhouse(id));//房源信息
-        model.addAttribute("judgelist",renterServices.getjudge(id));//评价信息
-        return "/detail.html";
-    }
-
-
-    //    加载main页面中煮熟推荐的房源信息
+    //    加载main页面中专属推荐的房源信息
     @RequestMapping("/perhouse")
     @ResponseBody
     public List<House> perhouse(int startpage,int pagesize,HttpSession session){
@@ -171,13 +181,66 @@ public String hostReg(@RequestParam(required = true) String regname,
     @ResponseBody
     public List<String> turnpage2(int startpage,int pagesize,HttpSession session){
         System.out.println("正在查询专属分页");
-        System.out.println(renterServices.turnPage2(startpage, pagesize,session)+"每页显示记录条数："+pagesize);
-        return renterServices.turnPage2(startpage, pagesize,session);
+        List<String> list = renterServices.turnPage2(startpage, pagesize, session);
+        System.out.println(list);
+        if (list==null){
+            list = new ArrayList<>();
+            list.add("0");
+            list.add("0");
+        }
+        return list;
     }
 
 
+    @RequestMapping("/allhouse")
+    @ResponseBody
+    public List<House> allhouse(int startpage,int pagesize){
+        System.out.println("查询所有房源");
+        System.out.println(renterServices.allHouse(startpage,pagesize));
+        return renterServices.allHouse(startpage,pagesize);
+    }
+
+    @RequestMapping("/turnpage3")
+    @ResponseBody
+    public List<String> turnpage3(int startpage,int pagesize){
+        System.out.println("所有房源分页");
+        System.out.println(renterServices.turnPage3(startpage,pagesize));
+        return renterServices.turnPage3(startpage,pagesize);
+    }
 
 
+    //    租房操作
+    @RequestMapping("/renthouse")
+    @ResponseBody
+    public List<String> renthouse(int id,HttpSession session){
+        System.out.println("租房数据+++++++++++++++++"+id);
+        List<String> list = new ArrayList<>();
+        if (session.getAttribute("user")==null){
+            list.add("1");
+            return list;
+        }
+        int renthouse = renterServices.renthouse(id, session);
+        System.out.println("控制器层判断是否成功"+renthouse);
+        if (renthouse == 0){
+            list.add("2");
+            return list;
+        }else{
+            list.add("3");
+            return list;
+        }
+    }
 
+
+    //    意见反馈
+    @RequestMapping("/complain")
+    @ResponseBody
+    public int complain(String complaintext,HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            return 0;
+        }else{
+            return renterServices.complain(complaintext, session);
+        }
+    }
 
 }

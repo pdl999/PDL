@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" 	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理系统</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- bootstrap 3.0.2 -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+    <!-- font Awesome -->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link th:href="@{/css/ionicons.css}" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link th:href="@{/css/AdminLTE.css}" rel="stylesheet" type="text/css" />
+
+    <!-- jQuery 2.0.2 -->
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <!-- jQuery UI 1.10.3 -->
+    <!-- Bootstrap -->
+    <script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/js/AdminLTE/app.js}" type="text/javascript"></script>
+
+</head>
+<body class="skin-blue">
+<!-- header logo: style can be found in header.less -->
+<header class="header">
+    <a href="index.html" class="logo">
+        后台管理
+    </a>
+    <div th:insert="~{adm/admincommons::admintopbar}"></div>
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="left-side sidebar-offcanvas">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <div th:insert="~{adm/admincommons::adminsiderbar(adminflag='adminindex')}"></div>
+
+    </aside>
+
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side">
+
+
+        <!-- 主要内容显示 -->
+        <section class="content">
+
+        <div class="col-md-12" style="border-bottom: 1px solid #9d9d9d;">
+            <p style="line-height: 100%;">当前位置：大厅</p>
+        </div>
+
+            <div class="col-md-12" style="text-align: center;">
+                <h3>我是主页大厅</h3>
+                <ul style="list-style: none;">
+                    <li> <h4>1：房源审核,此处只显示等待审核的房源</h4></li>
+                    <li> <h4>2：用户反馈，只显示未查看的反馈信息的简单信息，点击按钮代表已经处理</h4></li>
+                    <li> <h4>3：显示登陆的管理员的姓名，右上角有退出登录功能</h4></li>
+                </ul>
+
+            </div>
+
+
+
+
+
+
+        </section><!-- /.content -->
+    </aside><!-- /.right-side -->
+</div><!-- ./wrapper -->
+
+
+
+
+
+</body>
+</html>

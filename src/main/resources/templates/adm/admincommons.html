@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+
+</head>
+<body>
+
+<!--顶部-->
+<!-- header logo: style can be found in header.less -->
+<!-- Header Navbar: style can be found in header.less -->
+<nav class="navbar navbar-static-top" role="navigation" th:fragment="admintopbar">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </a>
+    <div class="navbar-right">
+        <ul class="nav navbar-nav">
+            <!-- Messages: style can be found in dropdown.less-->
+            <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-envelope"></i>
+                    <span class="label label-success"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">You have no messages</li>
+
+                    <li class="footer"><a href="#">See All Messages</a></li>
+                </ul>
+            </li>
+            <!-- Notifications: style can be found in dropdown.less -->
+            <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-warning"></i>
+                    <span class="label label-warning"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">You have no notifications</li>
+
+                    <li class="footer"><a href="#">View all</a></li>
+                </ul>
+            </li>
+            <!-- Tasks: style can be found in dropdown.less -->
+            <li class="dropdown tasks-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-tasks"></i>
+                    <span class="label label-danger"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">You have no tasks</li>
+
+                    <li class="footer">
+                        <a href="#">View all tasks</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span th:text="${session.admin.adminname}">Jane Doe <i class="caret"></i></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header bg-light-blue">
+                        <img th:src="@{/img/avatar04.png}" class="img-circle" alt="User Image" />
+                        <p>
+                            [[${session.admin.adminname}]]
+                            <small>网站管理员</small>
+                        </p>
+                    </li>
+                    <!-- Menu Body -->
+                    <li class="user-body">
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Followers</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Sales</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Friends</a>
+                        </div>
+                    </li>
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        </div>
+                        <div class="pull-right">
+                            <a th:href="@{/admin/logout}" class="btn btn-default btn-flat">Sign out</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+<!--侧边栏-->
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar" th:fragment="adminsiderbar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+        <div class="pull-left image">
+            <img th:src="@{/img/avatar04.png}" class="img-circle" alt="User Image" />
+        </div>
+        <div class="pull-left info">
+            <p th:text="${session.admin.adminname}">Hello, Jane</p>
+
+            <a href="#"><i class="fa fa-circle text-success"></i>在线</a>
+        </div>
+    </div>
+    <!-- search form -->
+    <form action="#"  class="sidebar-form">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search..."/>
+            <span class="input-group-btn">
+                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+<!--        <li th:class="${adminflag=='adminindex'?'treeview':'active'}">-->
+        <li  class="active">
+         <a th:href="@{/admin/index}">
+                <i class="fa fa-dashboard"></i> <span>大厅</span>
+            </a>
+        </li>
+<!--        <li  th:class="${adminflag=='houseaudit'?'treeview':'active'}">-->
+        <li  class="active">
+            <a th:href="@{/admin/allhouseAduit}">
+                <i class="fa fa-th"></i> <span>房源审核</span>
+                <small class="badge pull-right bg-yellow">已实现</small>
+            </a>
+        </li>
+        <li class="active">
+            <a href="#">
+                <i class="fa fa-bar-chart-o"></i>
+                <span>租户管理</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+
+                <li><a href="#"><i class="fa fa-angle-double-right"></i> 信息展示</a></li>
+                <li><a href="#"><i class="fa fa-angle-double-right"></i>	正在开发</a></li>
+            </ul>
+        </li>
+        <li class="active">
+            <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>房东管理</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-angle-double-right"></i>信息展示</a></li>
+                <li><a href="#"><i class="fa fa-angle-double-right"></i>房源统计</a></li>
+                <li><a href="#"><i class="fa fa-angle-double-right"></i>正在开发</a></li>
+            </ul>
+        </li>
+        <li class="active">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>房源管理</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-angle-double-right"></i>交易记录</a></li>
+                <li><a href="#"><i class="fa fa-angle-double-right"></i>房源管理</a></li>
+
+            </ul>
+        </li>
+<!--        <li th:class="${adminflag=='complaint'?'treeview':'active'}">-->
+        <li  class="active">
+            <a th:href="@{/admin/usrecomplaint}">
+                <i class="fa fa-table"></i> <span>用户反馈</span>
+                <small class="badge pull-right bg-yellow">已实现</small>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-angle-double-right"></i>所有信息</a></li>
+                <li><a href="#"><i class="fa fa-angle-double-right"></i>未处理信息</a></li>
+            </ul>
+        </li>
+        <li class="active">
+            <a href="#">
+                <i class="fa fa-calendar"></i> <span>合同管理</span>
+                <small class="badge pull-right bg-red"></small>
+            </a>
+        </li>
+        <li class="active">
+            <a href="#">
+                <i class="fa fa-envelope"></i> <span>系统设置</span>
+                <small class="badge pull-right bg-yellow"></small>
+            </a>
+        </li>
+
+    </ul>
+</section>
+<!-- /.sidebar -->
+
+<script>
+    // $(function () {
+    //     $(".aa").on("click",function () {
+    //         alert("aaa");
+    //     });
+    //     $(".bb").on("click",function () {
+    //         alert("bbbbb");
+    //     })
+    // })
+</script>
+</body>
+</html>

@@ -1,13 +1,7 @@
-<!--
-Author: xmoban.cn
-Author URL: http://www.xmoban.cn/
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Rental a Real Estates and Builders Category Flat bootstrap Responsive website Template | Portfolio :: xmoban.cn</title>
+<title>用户意见反馈</title>
 <!--mobile apps-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,8 +24,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			$(".scroll").click(function(event){		
 				event.preventDefault();
 		
-		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 			});
+
+			$("#comid").on("click",function () {
+				var str = $("#comtext").val();
+				if (str.length == 0){
+					alert("请填写内容")
+				} else{
+					$.ajax({
+						type: "post",
+						url: "/complain",    //意见反馈提交
+						data: {
+							complaintext:str
+						},
+						success: function (data) {
+							if (data==0){
+								alert("登录后才能继续操作");
+							} else{
+								alert("提交成功，感谢您的反馈");
+								$("#comtext").html("");
+							}
+						}
+					});
+				}
+
+			})
+
 		});
 </script>
 <!--//end-smoth-scrolling-->
@@ -44,19 +63,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="contact">
 		<div class="container">
 			<div class="contact-grids">
-				<div class="col-md-6 contact-grid">
-<!--					<iframe th:src="@{/images/login.jpg}" allowfullscreen></iframe>-->
+				<div class="col-md-6 contact-grid" >
 					<img th:src="@{/images/login.jpg}" alt="">
 				</div>
 				<div class="col-md-6 contact-grid">
 					<h3 class="title">用户反馈</h3>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum </p>
+					<p>请填写您的反馈意见并提交，我们会及时处理</p>
 					<form>
-						<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-						<input type="text" class="input-mdl" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-						<input type="text" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}" required="">
-						<textarea type="text"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
-						<input type="submit" value="Send Message" >
+<!--						<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">-->
+<!--						<input type="text" class="input-mdl" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">-->
+<!--						<input type="text" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}" required="">-->
+						<textarea id="comtext" style="height: 300px;" type="text"  placeholder="点击开始输入..." required=""></textarea>
+						<input type="submit" value="提交反馈" id="comid">
 					</form>
 				</div>
 				<div class="clearfix"> </div>

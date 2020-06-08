@@ -74,7 +74,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <p class="m-s-t" th:text="${detail.houseAdder}"></p>
                                 <span class="m-s-t">月租：</span><span class="m-s-t" th:text="${detail.pirce}"></span><span class="m-s-t">￥/月</span>
                                 <div class="clearfix"></div>
-                                <a class="more-show-time checkit" href="#" th:id="${detail.houseId}">我要下单</a>
+                                <span class="af"><a class="more-show-time checkit" href="#" th:id="${detail.houseId}">我要下单</a></span>
                             </div>
 
                         </div>
@@ -112,17 +112,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         $(".checkit").on("click",function () {
             var houseId = $(".checkit").attr("id");//房子的id
-            // $.ajax({
-            //     type: "post",
-            //     url: "/renthouse",    //租房请求
-            //     data: {
-            //         startpage:page,
-            //         pagesize:6
-            //     },
-            //     success: function (data) {
-            //         var html = "";
-            //     }
-            // });
+            $.ajax({
+                type: "post",
+                url: "/renthouse",    //租房请求
+                data: {
+                    id:houseId
+                },
+                success: function (data) {
+                    if (data[0]==1){
+                        alert("登录后重新操作");
+                    } else if (data[0]==2){
+                        alert("房子已经被抢先下手，请到大厅重新挑选");
+                        var html = "<a class='more-show-time'  href='#'>已售空</a>"
+                        $(".af").html(html);
+                    }else{
+                        alert("下单成功");
+                        var html = "<a class='more-show-time'  href='#'>已售空</a>"
+                        $(".af").html(html);
+                    }
+                }
+            });
         });
     //    下单事件end
     });

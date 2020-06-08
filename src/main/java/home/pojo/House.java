@@ -27,6 +27,7 @@ public class House {
     private  Date previousTime;//最近一次被租出去的时间
     private  Date lowerTime;//下架时间
     private String status;//房源的状态
+    private String adminaudit;//管理员对房屋的审核
     private String housePic;//图片路径
 
 

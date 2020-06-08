@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="home.dao.AdminMapper">
+
+    <!--    管理员登录-->
+    <select id="adminLogin" resultType="home.pojo.Admin">
+        SELECT * FROM admin WHERE adminName=#{adminname} and adminPwd=#{adminpwd}
+    </select>
+
+
+    <update id="updatehouse">
+        UPDATE house SET adminaudit=#{audit} WHERE houseid=#{houseid}
+    </update>
+
+    <update id="docomp" >
+        UPDATE complaint SET ischeck=1 where complaintId=#{compid}
+    </update>
+
+</mapper>

@@ -1,14 +1,8 @@
-<!--
-Author: xmoban.cn
-Author URL: http://www.xmoban.cn/
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Rental a Real Estates and Builders Category Flat bootstrap Responsive website Template | About ::
-        xmoban.cn</title>
+    <title>大厅（信息展示）</title>
     <!--mobile apps-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -89,24 +83,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         pagesize:6
                     },
                     success: function (data) {
-                        var html = "";
-                        for (var i=0;i<data.length;i++){
-                            html += "<div class='listitem col-md-3' id='" +data[i].houseId+
-                                " '><a href='/housedetail?id="+data[i].houseId+"' target='_blank' title='点击了解' alt='点击了解'>" +
-                                "<img src='.."+data[i].housePic+"' class='listimg'>\n" +
-                                "</a>" +
-                                "<div class='item_mes'>" +
-                                "<span class='glyphicon glyphicon-th-large'></span>"+data[i].houseName+"</div>\n" +
-                                "<div class='item_mes'>\n" +
-                                " <span class='glyphicon glyphicon-globe'></span>"+data[i].houseAdder
-                                +" </div>\n" +
-                                " <div class='item_mes'>\n" +
-                                " <span class='glyphicon glyphicon-usd'></span>"+data[i].pirce
-                                +"￥/月\n" +
-                                "</div>\t\n" +
-                                "</div>"
-                        }
-                        $(".mainlist").html(html);
+                       if (data[0]==null){
+                           alert("登录后才能查看");
+                           $(".mainlist").html("");
+
+                       } else{
+                           console.log(data);
+                           var html = "";
+                           for (var i=0;i<data.length;i++){
+                               html += "<div class='listitem col-md-3' id='" +data[i].houseId+
+                                   " '><a href='/housedetail?id="+data[i].houseId+"' target='_blank' title='点击了解' alt='点击了解'>" +
+                                   "<img src='.."+data[i].housePic+"' class='listimg'>\n" +
+                                   "</a>" +
+                                   "<div class='item_mes'>" +
+                                   "<span class='glyphicon glyphicon-th-large'></span>"+data[i].houseName+"</div>\n" +
+                                   "<div class='item_mes'>\n" +
+                                   " <span class='glyphicon glyphicon-globe'></span>"+data[i].houseAdder
+                                   +" </div>\n" +
+                                   " <div class='item_mes'>\n" +
+                                   " <span class='glyphicon glyphicon-usd'></span>"+data[i].pirce
+                                   +"￥/月\n" +
+                                   "</div>\t\n" +
+                                   "</div>"
+                           }
+                           $(".mainlist").html(html);
+                       }
                     }
                 });
             }
@@ -204,7 +205,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <p>价格：<span th:text="${hot0.pirce}"></span>￥/月</p>
                                     <p class="del">简介：<span th:text="${hot0.details}"></span></p>
                                     <div class="more more2">
-                                        <a th:href="@{/detail.html}" class="button-pipaluk button--inverted" target="_blank"> 了解更多</a>
+                                        <a th:href="@{/housedetail(id=${hot0.houseId})}" class="button-pipaluk button--inverted" target="_blank"> 了解更多</a>
                                     </div>
                                 </div>
                                 <div class="col-md-6  " style="float: right; display: inline-block;width: 400px; overflow: hidden;">
@@ -219,7 +220,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <p>价格：<span th:text="${hot1.pirce}"></span>￥/月</p>
                                     <p class="del">简介：<span th:text="${hot1.details}"></span></p>
                                     <div class="more more2">
-                                        <a th:href="@{/detail.html}" class="button-pipaluk button--inverted"> 了解更多</a>
+                                        <a th:href="@{/housedetail(id=${hot1.houseId})}" class="button-pipaluk button--inverted"> 了解更多</a>
                                     </div>
                                 </div>
                                 <div class="col-md-6  " style="float: right; display: inline-block;width: 400px;overflow: hidden;">
@@ -233,7 +234,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <p>价格：<span th:text="${hot2.pirce}"></span>￥/月</p>
                                     <p class="del">简介：<span th:text="${hot2.details}"></span></p>
                                     <div class="more more2">
-                                        <a th:href="@{/detail.html}" class="button-pipaluk button--inverted"> 了解更多</a>
+                                        <a th:href="@{/housedetail(id=${hot2.houseId})}" class="button-pipaluk button--inverted"> 了解更多</a>
                                     </div>
                                 </div>
                                 <div class="col-md-6  " style="float: right; display: inline-block;width: 400px;">
