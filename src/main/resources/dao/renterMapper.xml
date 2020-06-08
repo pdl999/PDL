@@ -4,8 +4,45 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="home.dao.RenterMapper">
 
-<!--    热推房源，将最新房源的前三名找出来-->
+    <!--    热推房源，将最新房源的前三名找出来-->
     <select id="houseRecomm" resultType="home.pojo.House">
-        SELECT * FROM house ORDER BY uploadTime DESC LIMIT 3
+        SELECT * FROM house WHERE adminaudit="审核通过" AND STATUS="招租" ORDER BY uploadTime DESC LIMIT 3
     </select>
+
+    <select id="showRenterList" resultType="home.pojo.Renter">
+        SELECT user.`userId`,user.`username`,user.`phone`,user.`sex`,house.`houseName`,house.`uploadTime`
+        FROM house RIGHT JOIN USER ON house.rent = user.userId
+        WHERE house.`owner`=#{userId}
+    </select>
+
+    <select id="showMessage" resultType="home.pojo.Judgement">
+        SELECT judgement.`jid` as jId,judgement.`jcontent`,judgement.`jtime`,house.`houseName`
+        FROM judgement RIGHT JOIN house ON house.houseId = judgement.houseId
+        WHERE house.`owner`=#{userId}
+    </select>
+
+    <update id="xiaJiaOwnerHouseDetail" >
+        UPDATE house SET status="下架" where houseId=#{houseId}
+    </update>
+
+
+    <update id="modifyHouse" >
+        UPDATE house SET houseAdder=#{houseAdder},
+        houseName=#{houseName},
+        pirce=#{pirce},
+        tagsList=#{tagsList},
+        details=#{details}
+        where houseId=#{houseId}
+    </update>
+
+    <insert id="addHouse" >
+        insert into house(houseName,houseAdder,pirce,details,tagslist,owner)
+        values(#{houseName},#{houseAdder},#{pirce},#{details},#{tagsList},#{userId})
+    </insert>
+
+    <select id="selectLastOneHouseId"  resultType="integer">
+        SELECT MAX(houseid) as houseId FROM house
+    </select>
+
+
 </mapper>
